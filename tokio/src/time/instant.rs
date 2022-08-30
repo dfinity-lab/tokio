@@ -209,7 +209,6 @@ mod variant {
     use super::Instant;
 
     pub(super) fn now() -> Instant {
-        println!("xxx: variant::now(): not(test-util)");
         Instant::from_std(std::time::Instant::now())
     }
 }
@@ -219,7 +218,6 @@ mod variant {
     use super::Instant;
 
     pub(super) fn now() -> Instant {
-        println!("yyy: variant::now(): test-util");
         crate::time::clock::now()
     }
 }

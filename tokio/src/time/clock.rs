@@ -13,7 +13,6 @@ cfg_not_test_util! {
     pub(crate) struct Clock {}
 
     pub(crate) fn now() -> Instant {
-        println!("xxx: clock::now(): cfg_not_test_util!");
         Instant::from_std(std::time::Instant::now())
     }
 
@@ -23,7 +22,6 @@ cfg_not_test_util! {
         }
 
         pub(crate) fn now(&self) -> Instant {
-            println!("xxx: Clock::now(self): cfg_not_test_util!");
             now()
         }
     }
@@ -35,14 +33,12 @@ cfg_test_util! {
 
     cfg_rt! {
         fn clock() -> Option<Clock> {
-            println!("yyy: clock(): cfg_test_util!, cfg_rt!");
             crate::runtime::context::clock()
         }
     }
 
     cfg_not_rt! {
         fn clock() -> Option<Clock> {
-            println!("yyy: clock(): cfg_test_util!, cfg_not_rt! => None");
             None
         }
     }
@@ -168,7 +164,6 @@ cfg_test_util! {
         if let Some(clock) = clock() {
             clock.now()
         } else {
-            println!("yyy: now(): cfg_test_util!: clock = None");
             Instant::from_std(std::time::Instant::now())
         }
     }
@@ -177,7 +172,6 @@ cfg_test_util! {
         /// Returns a new `Clock` instance that uses the current execution context's
         /// source of time.
         pub(crate) fn new(enable_pausing: bool, start_paused: bool) -> Clock {
-            println!("yyy: Clock::new(): cfg_test_util!");
             let now = std::time::Instant::now();
 
             let clock = Clock {
@@ -225,7 +219,6 @@ cfg_test_util! {
         }
 
         pub(crate) fn now(&self) -> Instant {
-            println!("yyy: Clock::now(self): cfg_test_util!");
             let inner = self.inner.lock();
 
             let mut ret = inner.base;
