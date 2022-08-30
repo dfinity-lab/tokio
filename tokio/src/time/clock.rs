@@ -219,15 +219,7 @@ cfg_test_util! {
         }
 
         pub(crate) fn now(&self) -> Instant {
-            let inner = self.inner.lock();
-
-            let mut ret = inner.base;
-
-            if let Some(unfrozen) = inner.unfrozen {
-                ret += unfrozen.elapsed();
-            }
-
-            Instant::from_std(ret)
+            Instant::from_std(std::time::Instant::now())
         }
     }
 }
