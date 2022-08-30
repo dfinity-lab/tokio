@@ -209,6 +209,7 @@ mod variant {
     use super::Instant;
 
     pub(super) fn now() -> Instant {
+        println!("tokio::time::Instant::now(): !test-util off");
         Instant::from_std(std::time::Instant::now())
     }
 }
@@ -218,6 +219,7 @@ mod variant {
     use super::Instant;
 
     pub(super) fn now() -> Instant {
+        println!("tokio::time::Instant::now(): !test-util on");
         crate::time::clock::now()
     }
 }

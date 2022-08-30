@@ -219,6 +219,7 @@ cfg_test_util! {
         }
 
         pub(crate) fn now(&self) -> Instant {
+            println!("tokio::time::clock::Clock::now(): !test-util on, to lock ...");
             let inner = self.inner.lock();
 
             let mut ret = inner.base;
